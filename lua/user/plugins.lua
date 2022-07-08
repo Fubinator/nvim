@@ -73,6 +73,9 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
   use "p00f/nvim-ts-rainbow"
+  
+  use "simrat39/rust-tools.nvim"
+  -- :wbthomasonuse "github/copilot.vim"
 
   use {'prettier/vim-prettier', run = { 'yarn install --frozen-lockfile --production' }, ft = {'javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'vue', 'graphql', 'yaml', 'json'}}
   -- Automatically set up your configuration after cloning packer.nvim
