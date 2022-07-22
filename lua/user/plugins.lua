@@ -75,8 +75,20 @@ return packer.startup(function(use)
   use "p00f/nvim-ts-rainbow"
   
   use "simrat39/rust-tools.nvim"
-  -- :wbthomasonuse "github/copilot.vim"
 
+  use {
+    "zbirenbaum/copilot-cmp",
+    module = "copilot_cmp",
+  }
+  use {
+    "zbirenbaum/copilot.lua",
+    event = {"VimEnter"},
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup()
+      end, 100)
+    end,
+  }
   use {'prettier/vim-prettier', run = { 'yarn install --frozen-lockfile --production' }, ft = {'javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'vue', 'graphql', 'yaml', 'json'}}
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
