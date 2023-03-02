@@ -1,7 +1,4 @@
 require('lualine').setup{
-  options = {
-    theme = "nord"
-  },
   tabline = {
     lualine_a = {},
     lualine_b = {},

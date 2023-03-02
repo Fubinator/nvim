@@ -34,7 +34,9 @@ packer.startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use 'arcticicestudio/nord-vim'
+  --  use 'arcticicestudio/nord-vim'
+
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
