@@ -21,7 +21,7 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-    "windwp/nvim-autopairs", 
+    "windwp/nvim-autopairs",
     wants= "nvim-treesitter",
     module = { "nvim-autoparis.completion.cmp", "nvim-autopairs" },
     config = function()
@@ -34,9 +34,9 @@ packer.startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  --  use 'arcticicestudio/nord-vim'
-
   use { "catppuccin/nvim", as = "catppuccin" }
+
+  use "github/copilot.vim"
 
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
