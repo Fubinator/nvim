@@ -22,3 +22,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Move tab
 vim.keymap.set("n", "<leader>tn", ":+tabm<cr>")
 vim.keymap.set("n", "<leader>tp", ":-tabm<cr>")
+
+-- alternate file
+vim.keymap.set("n", "<leader>af", ":e #<cr>")

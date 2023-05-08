@@ -2,4 +2,4 @@ vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
 
-vim.keymap.set("i", "<C-a>", 'copilot#Accept("")', { silent = true, expr = true })
+vim.keymap.set("i", "<C-a>", 'copilot#Accept("")', { noremap = true, silent = true, expr = true, replace_keycodes = false })
