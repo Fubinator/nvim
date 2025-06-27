@@ -25,3 +25,4 @@ vim.keymap.set("n", "<leader>tp", ":-tabm<cr>")
 
 -- alternate file
 vim.keymap.set("n", "<leader>af", ":e #<cr>")
+
