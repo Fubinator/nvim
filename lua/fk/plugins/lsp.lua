@@ -21,82 +21,44 @@ lsp.on_attach = on_attach
 
 lsp.setup()
 
--- require'lspconfig'.ts_tls.setup{
--- init_options = {
---   plugins = {
---     {
---       name = "@vue/typescript-plugin",
---       location = "/home/fk/.config/yarn/global/node_modules/@vue/typescript-plugin",
---       languages = {"javascript", "typescript", "vue"},
---     },
---   },
--- },
--- filetypes = {
---   "javascript",
---   "typescript",
---   "vue",
--- },
--- default_config = {
---   root_dir = [[root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")]],
--- },
--- on_attach = on_attach
--- }
-
--- local util = require 'lspconfig.util'
--- local function get_typescript_server_path(root_dir)
---   local project_root = util.find_node_modules_ancestor(root_dir)
---   return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib')) or ''
--- end
-
--- local volar_init_options = {
---   typescript = {
---     tsdk = '',
---   },
--- }
--- 
--- require'lspconfig'.volar.setup{
---   default_config = {
---     cmd = { 'vue-language-server', '--stdio' },
---     filetypes = { 'vue' },
---     root_dir = util.root_pattern 'package.json',
---     init_options = volar_init_options,
---     on_new_config = function(new_config, new_root_dir)
---       if
---         new_config.init_options
---         and new_config.init_options.typescript
---         and new_config.init_options.typescript.tsdk == ''
---       then
---         new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
---       end
---     end,
---   },
---   on_attach = on_attach
--- }
---
-
 local vue_language_server_path = '/home/fk/.yarn/bin/vue-language-server'
 
 local lspconfig = require('lspconfig')
 
-lspconfig.ts_ls.setup {
+vim.lsp.config("vue_ls", {
+  cmd = { vue_language_server_path, '--stdio' },
+  filetypes = { 'vue' },
+  root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
+  on_attach = on_attach,
   init_options = {
-    plugins = {
-      {
-        name = '@vue/typescript-plugin',
-        location = vue_language_server_path,
-        languages = { 'vue' },
+      typescript = {
+        tsdk = '/home/fk/.yarn/global/node_modules/typescript/lib',
+      },
+    }
+})
+
+local vue_typescript_plugin_path = '/home/fk/.config/yarn/global/node_modules/@vue/typescript-plugin'
+
+local vue_plugin = {
+  name = '@vue/typescript-plugin',
+  location = vue_typescript_plugin_path,
+  languages = { 'vue' },
+  configNamespace = 'typescript',
+  enableForWorkspaceTypeScriptVersions = true,
+}
+
+vim.lsp.config("vtsls", {
+  settings = {
+    vtsls = {
+      tsserver = {
+        globalPlugins = {
+          vue_plugin,
+        },
       },
     },
   },
-}
-
-lspconfig.volar.setup {
-  init_options = {
-    vue = {
-      hybridMode = false,
-    },
-  },
-}
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+})
 
 
 cmp.setup({
